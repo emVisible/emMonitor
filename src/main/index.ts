@@ -15,6 +15,7 @@ function createWindow(): void {
     x: 1750,
     y: 900,
     show: false,
+    skipTaskbar:true,
     resizable:false,
     autoHideMenuBar: true,
     alwaysOnTop:true,
