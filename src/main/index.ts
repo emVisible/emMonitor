@@ -3,14 +3,22 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import "./sysInfo"
+import {createTary} from './tray'
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 800,
+    width: 96,
+    height: 96,
+    minHeight:96,
+    minWidth:96,
+    x: 1750,
+    y: 900,
     show: false,
+    resizable:false,
     autoHideMenuBar: true,
+    alwaysOnTop:true,
+    transparent: true,
     frame: false,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
@@ -18,7 +26,8 @@ function createWindow(): void {
       sandbox: false
     }
   })
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
+
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
@@ -44,7 +53,7 @@ function createWindow(): void {
 app.whenReady().then(() => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
-
+  createTary()
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
   // see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils

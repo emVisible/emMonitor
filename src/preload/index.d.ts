@@ -6,7 +6,7 @@ declare global {
     api: {
       getCpuMsg:Function,
       getMemoryMsg: Function,
-      getNetMsg: Function
+      rClick:Function
     }
   }
 }

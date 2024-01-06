@@ -1,27 +1,31 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import Taichi from './components/taichi'
 
 function App(): JSX.Element {
-  const [cpu, setCpu] = useState(0)
-  const [memory, setMemory] = useState(0)
-  const [net, setNet] = useState(0)
+  const [cpu, setCPU] = useState(0.0)
+  const [memory, setMemory] = useState(0.0)
 
   const queryStatus = async () => {
-    const res1 = await window.api.getCpuMsg()
-    const res2 = await window.api.getMemoryMsg()
-    const res3 = await window.api.getNetMsg()
-    console.log('res1', res1)
-    console.log('res2', res2)
-    console.log('res3', res3)
+    const cpuLoad = (await window.api.getCpuMsg()) as number
+    const memoryLoad = (await window.api.getMemoryMsg()) as number
+    setCPU(Math.round(cpuLoad))
+    setMemory(Math.round(memoryLoad * 100))
   }
 
-  setTimeout(() => {
-    queryStatus()
-  }, 0)
+  const queryMsg = () => {
+    setTimeout(() => {
+      queryStatus()
+      queryMsg()
+    }, 1000)
+  }
+
+  useEffect(() => {
+    queryMsg()
+  })
+
   return (
-    <div className="drag">
-      <section>CPU{cpu} %</section>
-      <section>Memory{memory} %</section>
-      <section>Net {net} %</section>
+    <div className="drag basis">
+      <Taichi cpu={cpu} memory={memory}/>
     </div>
   )
 }

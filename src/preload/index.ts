@@ -9,8 +9,9 @@ const api = {
   getMemoryMsg(){
     return ipcRenderer.invoke('memory')
   },
-  getNetMsg(){
-    return ipcRenderer.invoke("net")
+  rClick(){
+    console.log("CLK")
+    ipcRenderer.send('rClick')
   }
 }
 
