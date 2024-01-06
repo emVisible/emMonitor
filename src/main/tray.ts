@@ -1,4 +1,4 @@
-import { BrowserWindow, Event, Menu, MenuItem, MenuItemConstructorOptions, Tray, app, ipcMain } from 'electron'
+import { Menu, MenuItemConstructorOptions, Tray } from 'electron'
 import path from 'path'
 
 const createTary = () => {
@@ -16,3 +16,4 @@ const createTary = () => {
 }
 
 export { createTary }
+
